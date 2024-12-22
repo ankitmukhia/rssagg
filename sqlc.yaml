@@ -1,0 +1,13 @@
+# look sql/schema dir for schema structure
+# sqlc auto ignores "down" migrations
+# look sql/queries for queries
+# internal/database: output code will generate
+
+version: "2"
+sql:
+  - schema: "sql/schema"
+    queries: "sql/queries"
+    engine: "postgresql"
+    gen:
+      go:
+        out: "internal/database"
