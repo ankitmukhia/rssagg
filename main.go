@@ -55,7 +55,7 @@ func main() {
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/err", handlerErr)
 	v1Router.Post("/users", dbQueries.handlerCreateUser)
-	v1Router.Get("/users", dbQueries.handlerGetUser)
+	v1Router.Get("/users", dbQueries.middlewareAuth(dbQueries.handlerGetUser))
 
 	/* attaches another http.handler as a subrouter: v1/healthz */
 	r.Mount("/v1", v1Router)

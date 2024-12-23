@@ -9,7 +9,6 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/ankitmukhia/rssagg/internal/database"
-	"github.com/ankitmukhia/rssagg/internal/auth"
 )
 
 func (apiCfg *state) handlerCreateUser(w http.ResponseWriter, r *http.Request) {
@@ -39,19 +38,7 @@ func (apiCfg *state) handlerCreateUser(w http.ResponseWriter, r *http.Request) {
 	responseWithJson(w, 201, user)
 }
 
-func (apiCfg state) handlerGetUser(w http.ResponseWriter, r *http.Request) {
+func (apiCfg *state) handlerGetUser(w http.ResponseWriter, r *http.Request, user database.User) {
 	// auth endpoint
-	token, err := auth.GetApiKey(r.Header)
-	if err != nil {
-		responseWithError(w, 403, fmt.Sprintf("unauthorized user %v", err))
-		return
-	}
-
-	user, err := apiCfg.db.GetUser(r.Context(), token)
-	if err != nil {
-		responseWithJson(w, 400, fmt.Sprintf("Couldn't get user %v", err))
-		return
-	}
-
 	responseWithJson(w, 201, user)
 }
