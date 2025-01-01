@@ -30,6 +30,7 @@ func urlToFeed(url string) (RSSFeed, error) {
 	httpClient := http.Client{
 		Timeout: 10 * time.Second,
 	}
+
 	res, err := httpClient.Get(url)
 	if err != nil {
 		return RSSFeed{}, nil

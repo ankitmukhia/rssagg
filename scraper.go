@@ -9,4 +9,5 @@ import (
 
 func startScraping(database *database.Queries, concurrency int, timeBetweenRequest time.Duration) {
 	//?
+	/* 1. log message that says scrapping strts */
 }
