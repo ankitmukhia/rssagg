@@ -55,8 +55,10 @@ func main() {
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/err", handlerErr)
+
 	v1Router.Post("/users", dbQueries.handlerCreateUser)
 	v1Router.Get("/users", dbQueries.middlewareAuth(dbQueries.handlerGetUser))
+
 	v1Router.Post("/feeds", dbQueries.middlewareAuth(dbQueries.handlerCreateFeed))
 	v1Router.Get("/feeds", dbQueries.handlerGetFeeds)
 
