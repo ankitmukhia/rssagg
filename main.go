@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
+	/* https://stackoverflow.com/questions/52789531/how-do-i-solve-panic-sql-unknown-driver-postgres-forgotten-import */
  	 _ "github.com/lib/pq"
 
 	"github.com/ankitmukhia/rssagg/internal/database"
