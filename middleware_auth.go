@@ -18,7 +18,7 @@ func (apiCfg *state) middlewareAuth(next  handlers) http.HandlerFunc {
 			return
 		}
 
-		user, err := apiCfg.db.GetUser(r.Context(), token)
+		user, err := apiCfg.DB.GetUser(r.Context(), token)
 		if err != nil {
 			responseWithJson(w, 400, fmt.Sprintf("Couldn't get user %v", err))
 			return

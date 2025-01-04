@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"time"
 	"database/sql"
 	"net/http"
 
@@ -17,7 +18,7 @@ import (
 
 //NOTE:Opened connection to db, and stored it in the state struct. Now I can perform all regular db queries.
 type state struct {
-	db *database.Queries
+	DB *database.Queries
 }
 
 func main() {
@@ -33,14 +34,16 @@ func main() {
 		log.Fatal("URL not found")
 	}
 
-	db, err := sql.Open("postgres", db_url)
+	dbCon, err := sql.Open("postgres", db_url)
 	if err != nil {
 		log.Fatal("Unable to connect to db", err)
 	}
-	
+	db := database.New(dbCon)
 	dbQueries := state{
-		db: database.New(db),
+		DB: db,
 	}
+
+	go startScraping(db, 10, time.Minute) 
 
 	r := chi.NewRouter()
 	r.Use(cors.Handler(cors.Options{

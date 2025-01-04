@@ -24,7 +24,7 @@ func (cfgApi *state) handlerCreateFeed(w http.ResponseWriter, r *http.Request, u
 		}
 
 		//? db call
-		feed, err := cfgApi.db.CreateFeed(r.Context(), database.CreateFeedParams{
+		feed, err := cfgApi.DB.CreateFeed(r.Context(), database.CreateFeedParams{
 			ID: uuid.New(),
 			CreatedAt: time.Now().UTC(),
 			UpdatedAt: time.Now().UTC(),
@@ -37,7 +37,7 @@ func (cfgApi *state) handlerCreateFeed(w http.ResponseWriter, r *http.Request, u
 }
 
 func (cfgApi state) handlerGetFeeds(w http.ResponseWriter, r *http.Request) {
-	feeds, err := cfgApi.db.GetFeed(r.Context())
+	feeds, err := cfgApi.DB.GetFeed(r.Context())
 	if err != nil {
 		responseWithError(w, 400, fmt.Sprintf("Counldn't find feeds: %v", err))
 		return

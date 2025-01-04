@@ -25,7 +25,7 @@ func (cfgApi state) handlerFollowFeed(w http.ResponseWriter, r *http.Request, us
 	}
 
 	//? database call
-	feedFollow, err := cfgApi.db.CreateFollowFeed(r.Context(), database.CreateFollowFeedParams{
+	feedFollow, err := cfgApi.DB.CreateFollowFeed(r.Context(), database.CreateFollowFeedParams{
 		ID: uuid.New(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -43,7 +43,7 @@ func (cfgApi state) handlerFollowFeed(w http.ResponseWriter, r *http.Request, us
 
 func (cfgApi state) handlerGetFollowFeed(w http.ResponseWriter, r *http.Request, user database.User) {
 	//? db call
-	allFollowFeed, err := cfgApi.db.GetFollowFeed(r.Context(), user.ID)
+	allFollowFeed, err := cfgApi.DB.GetFollowFeed(r.Context(), user.ID)
 	if err != nil {
 		responseWithError(w, 400, fmt.Sprintf("couldn't find feeds: %v", err))
 		return
@@ -61,7 +61,7 @@ func (cfgApi state) handlerDeleteFollowFeed(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	
-	err = cfgApi.db.DeleteFollowFeed(r.Context(), database.DeleteFollowFeedParams{
+	err = cfgApi.DB.DeleteFollowFeed(r.Context(), database.DeleteFollowFeedParams{
 		ID: feedFollowId,
 		UserID: user.ID,
 	})
