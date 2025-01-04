@@ -66,7 +66,7 @@ func (q *Queries) DeleteFollowFeed(ctx context.Context, arg DeleteFollowFeedPara
 }
 
 const getFollowFeed = `-- name: GetFollowFeed :many
-SELECT id, created_at, updated_at, user_id, feed_id FROM follow_feed WHERE user_id=$1
+SELECT id, created_at, updated_at, user_id, feed_id FROM follow_feed WHERE user_id = $1
 `
 
 func (q *Queries) GetFollowFeed(ctx context.Context, userID uuid.UUID) ([]FollowFeed, error) {
