@@ -42,3 +42,17 @@ func (apiCfg *state) handlerGetUser(w http.ResponseWriter, r *http.Request, user
 	// auth endpoint
 	responseWithJson(w, 201, user)
 }
+
+func (apiCfg *state) handlerGetPostsForUser(w http.ResponseWriter, r *http.Request, user database.User) {
+	posts, err := apiCfg.DB.GetPostsForUser(r.Context(), database.GetPostsForUserParams{
+		UserID: user.ID,
+		Limit: 10,	
+	})
+
+	if err != nil {
+		responseWithError(w, 400, fmt.Sprintf("Couldn't get posts %v", err))
+		return
+	}
+
+	responseWithJson(w, 200, posts)
+}

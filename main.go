@@ -68,6 +68,7 @@ func main() {
 	v1Router.Post("/follow_feed", dbQueries.middlewareAuth(dbQueries.handlerFollowFeed))
 	v1Router.Get("/follow_feed", dbQueries.middlewareAuth(dbQueries.handlerGetFollowFeed))
 	v1Router.Delete("/follow_feed/{feedFollowId}", dbQueries.middlewareAuth(dbQueries.handlerDeleteFollowFeed))
+	v1Router.Get("/posts", dbQueries.middlewareAuth(dbQueries.handlerGetPostsForUser))
 
 	/* attaches another http.handler as a subrouter: v1/healthz */
 	r.Mount("/v1", v1Router)
